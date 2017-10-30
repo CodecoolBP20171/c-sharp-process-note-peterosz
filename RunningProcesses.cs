@@ -13,13 +13,15 @@ namespace ProcessNote
        
         }
 
-        public void ShowRunningProcesses()
+        public List<string> getRunningProcesses()
         {
             Process[] localAll = Process.GetProcesses();
+            List<string> ProcessList = new List<string>();
             foreach (Process local in localAll)
             {
-                Console.WriteLine(local.ToString());
+                ProcessList.Add(local.ProcessName.ToString());
             }
+            return ProcessList;
         }
 }
 }

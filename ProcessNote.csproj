@@ -38,6 +38,8 @@
     <Reference Include="System.Core" />
     <Reference Include="System.Data" />
     <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
     <Reference Include="System.Xml.Linq" />
   </ItemGroup>
@@ -86,6 +88,17 @@
   <ItemGroup>
     <Compile Include="ProcessNoteMain.cs" />
     <Compile Include="RunningProcesses.cs" />
+    <Compile Include="RunningProcessesPanel.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="RunningProcessesPanel.Designer.cs">
+      <DependentUpon>RunningProcessesPanel.cs</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="RunningProcessesPanel.resx">
+      <DependentUpon>RunningProcessesPanel.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSHARP.Targets" />
   <ProjectExtensions>
