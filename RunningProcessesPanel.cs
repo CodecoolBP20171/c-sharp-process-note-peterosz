@@ -54,5 +54,16 @@ namespace ProcessNote
                 dataGridView2.Rows.Add(serviceArray);
             }
         }
+
+        private void alwaysOnTopToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (this.TopMost != true)
+            {
+                this.TopMost = true;
+            } else
+            {
+                this.TopMost = false;
+            }
+        }
     }
 }
