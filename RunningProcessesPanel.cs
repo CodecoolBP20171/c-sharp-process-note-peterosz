@@ -13,6 +13,8 @@ namespace ProcessNote
     public partial class RunningProcessesPanel : Form
     {
         RunningProcesses runningProcesses = new RunningProcesses();
+        string selectedProcessId = "";
+        Dictionary<string, string> comments = new Dictionary<string, string>();
 
         public RunningProcessesPanel()
         {
@@ -25,13 +27,14 @@ namespace ProcessNote
             dataGridView1.ColumnCount = 1;
             dataGridView1.Columns[0].Name = "Application Name";
 
-            dataGridView2.ColumnCount = 6;
-            dataGridView2.Columns[0].Name = "Process Name";
-            dataGridView2.Columns[1].Name = "CPU usage";
-            dataGridView2.Columns[2].Name = "Memory usage";
-            dataGridView2.Columns[3].Name = "Running time";
-            dataGridView2.Columns[4].Name = "Start time";
-            dataGridView2.Columns[5].Name = "Threads of it in another dialog";
+            dataGridView2.ColumnCount = 7;
+            dataGridView2.Columns[0].Name = "Process ID";
+            dataGridView2.Columns[1].Name = "Process Name";
+            dataGridView2.Columns[2].Name = "CPU usage";
+            dataGridView2.Columns[3].Name = "Memory usage";
+            dataGridView2.Columns[4].Name = "Running time";
+            dataGridView2.Columns[5].Name = "Start time";
+            dataGridView2.Columns[6].Name = "Threads of it in another dialog";
 
             foreach (string AppName in runningProcesses.GetAllWithAttributes().Keys)
             {
@@ -64,6 +67,43 @@ namespace ProcessNote
             {
                 this.TopMost = false;
             }
+        }
+
+        private void label1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void dataGridView2_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (richTextBox2.Text != null)
+            {
+                richTextBox2.Text = "";
+            }
+            DataGridViewRow selectedRow = dataGridView2.SelectedRows[0];
+            string selectedProcess = selectedRow.Cells[1].Value.ToString();
+            selectedProcessId = selectedRow.Cells[0].Value.ToString();
+            label2.Text = selectedProcess;
+            if (comments.ContainsKey(selectedProcessId))
+            {
+                richTextBox2.Text = comments[selectedProcessId];
+            }
+            
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            string commentToSave = richTextBox1.Text;
+            if (comments.ContainsKey(selectedProcessId))
+            {
+                comments[selectedProcessId] = commentToSave;
+            }
+            else
+            {
+                comments.Add(selectedProcessId, commentToSave);
+            }
+            richTextBox1.Text = "Your comment was saved.";
+            richTextBox2.Text = comments[selectedProcessId];
         }
     }
 }
